@@ -2,17 +2,17 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Category } from './category.model';
 import { CategoryService } from './category.service';
 
-@Controller()
+@Controller('category')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Get()
-  findAll(): Category[] {
+  async findAll(): Promise<Category[]> {
     return this.categoryService.findAll();
   }
 
   @Post()
-  create(@Body() body: Category): Category {
+  async create(@Body() body: Category): Promise<Category> {
     return this.categoryService.create(body);
   }
 }

@@ -1,20 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { Category } from './category.model';
-import { InjectConnection } from '@nestjs/mongoose';
-import { Connection } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class CategoryService {
   constructor(
-    @InjectConnection()
-    private connection: Connection,
+    @InjectModel(Category.name) private categoryModel: Model<Category>,
   ) {}
 
-  findAll(): Category[] {
-    return [];
+  findAll(): Promise<Category[]> {
+    return this.categoryModel.find().exec();
   }
 
-  create(body: Category): Category {
-    return body;
+  create(body: Category): Promise<Category> {
+    return this.categoryModel.create(body);
   }
 }
