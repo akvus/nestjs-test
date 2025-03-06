@@ -10,7 +10,7 @@ import { Category, CategoryScheme } from './category.model';
       { name: Category.name, schema: CategoryScheme },
     ]),
   ],
-
+  exports: [],
   controllers: [CategoryController],
   providers: [CategoryService],
 })
