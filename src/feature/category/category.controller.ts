@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { Category } from './category.model';
 import { CategoryService } from './category.service';
 
@@ -7,7 +7,8 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Get()
-  async findAll(): Promise<Category[]> {
+  async findAll(@Req() request: Request): Promise<Category[]> {
+    console.log(request.url);
     return this.categoryService.findAll();
   }
 
